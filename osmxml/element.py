@@ -66,7 +66,7 @@ class XMLElement(XML):
         attrs_str = self._combine_attributes()
         children_str = "".join(["\n\t{child}".format(child=child.to_string()) for child in self._children])
 
-        if not self.has_children():
+        if (not self.has_children()):
             return "<{name}{attrs}/>".format(name=self.name, attrs=attrs_str)
        
         element_str = "<{name}{attrs}>{children}\n</{name}>".format(
@@ -78,6 +78,6 @@ class XMLElement(XML):
         return element_str
 
     def _combine_attributes(self) -> str:
-        if self.has_attributes():
+        if (self.has_attributes()):
             return " {attrs}".format(attrs=" ".join(attr.to_string() for attr in self._attributes))
         return ""
