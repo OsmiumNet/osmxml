@@ -64,10 +64,11 @@ class XMLElement(XML):
 
     def to_string(self) -> str:
         attrs_str = self._combine_attributes()
-        children_str = "".join(["\n\t{child}".format(child=child.to_string()) for child in self._children])
 
         if (not self.has_children()):
             return "<{name}{attrs}/>".format(name=self.name, attrs=attrs_str)
+
+        children_str = "".join(["\n\t{child}".format(child=child.to_string()) for child in self._children])
        
         element_str = "<{name}{attrs}>{children}\n</{name}>".format(
             name=self.name,
