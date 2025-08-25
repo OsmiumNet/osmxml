@@ -81,9 +81,11 @@ class TestElement(unittest.TestCase):
             children=element_children
         )
 
+        tab = "    "
         element_test_str = '<element x1="value1" x2="value2">'
-        element_test_str = "".join([element_test_str, '\n\t<child1 x1="value1"/>'])
-        element_test_str = "".join([element_test_str, '\n\t<child2/>'])
+        element_test_str = "".join([element_test_str, '\n{tab}<child1 x1="value1"/>'])
+        element_test_str = "".join([element_test_str, '\n{tab}<child2/>'])
         element_test_str = "".join([element_test_str, '\n</element>'])
+        element_test_str = element_test_str.format(tab=tab) 
 
         self.assertEqual(element.to_string(), element_test_str)
