@@ -51,7 +51,7 @@ jobs:
     environment:
       name: Publish
       # OPTIONAL: uncomment and update to include your PyPI project URL in the deployment status:
-      url: https://pypi.org/p/YOURPROJECT
+      #url: https://pypi.org/p/YOURPROJECT
       #
       # ALTERNATIVE: if your GitHub Release name is the PyPI project version string
       # ALTERNATIVE: exactly, uncomment the following line instead:
@@ -65,6 +65,6 @@ jobs:
           path: dist/
 
       - name: Publish release distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@v1.12.4
         with:
           packages-dir: dist/
