@@ -36,7 +36,7 @@ class XMLElement(XML):
     def children(self) -> List[XML]:
         return self._children.copy()
 
-    @name.setter
+    @children.setter
     def children(self, children: List[XML]):
         self._children = children
 
