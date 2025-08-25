@@ -56,10 +56,10 @@ class XMLElement(XML):
 
 
     def has_attributes(self):
-        return len(self.attributes > 0)
+        return len(self.attributes) > 0
 
     def has_children(self):
-        return len(self.children > 0)
+        return len(self.children) > 0
 
 
     def to_string(self) -> str:
