@@ -11,8 +11,8 @@ class XMLElement(XML):
             children: Optional[List[XML]] = None,
         ):
         self._name = name 
-        self._attributes = attributes if attributes is not None else []
-        self._children = children if children is not None else []
+        self._attributes = attributes.copy() if attributes is not None else []
+        self._children = children.copy() if children is not None else []
 
     @property
     def name(self) -> str:
