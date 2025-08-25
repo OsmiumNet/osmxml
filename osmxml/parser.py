@@ -15,7 +15,9 @@ class XMLParser:
         if (not xml_string):
             return []
 
-        xml_elements = [] 
+        elements = []
+
+        element_tree = [] 
 
         pattern = re.compile(r'<([^>]+)>|([^<]+)')
         matches = pattern.finditer(xml_string)
@@ -47,27 +49,29 @@ class XMLParser:
                     )
 
 
-                    if (len(xml_elements) > 0):
-                        last_xml_element = xml_elements[-1]
+                    if (len(element_tree) > 0):
+                        last_xml_element = element_tree[-1]
 
                         if (last_xml_element.name == tag_name):
                             if (tag_is_close):
-                                #print(tag_name, "child", xml_elements[-2].name)
-                                if (len(xml_elements) > 1):
+                                if (len(element_tree) > 1):
                                     # Get and remove last element and put to previous as a child
-                                    xml_elements[-2].add_child(xml_elements.pop())
+                                    element_tree[-2].add_child(element_tree.pop())
+                                else:
+                                    # Add last full closed element to stack
+                                    elements.append(element_tree.pop())
                         else:
-                            xml_elements.append(xml_element)
+                            element_tree.append(xml_element)
                             if (tag_is_close):
                                 # Get and remove last element and put to previous as a child
-                                xml_elements[-2].add_child(xml_elements.pop())
+                                element_tree[-2].add_child(element_tree.pop())
                     else:
-                        xml_elements.append(xml_element)
+                        element_tree.append(xml_element)
 
             elif (text_content):
                 strip_text = text_content.strip()
                 if (strip_text):
-                    xml_elements[-1].add_child(XMLTextElement(text=strip_text))
+                    element_tree[-1].add_child(XMLTextElement(text=strip_text))
 
-        return xml_elements 
+        return elements 
 
