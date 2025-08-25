@@ -68,7 +68,7 @@ class XMLElement(XML):
         if (not self.has_children()):
             return "<{name}{attrs}/>".format(name=self.name, attrs=attrs_str)
 
-        children_str = "".join(["\n\t{child}".format(child=child.to_string()) for child in self._children])
+        children_str = "".join(["\n\t{child}".format(child=child.to_string().replace('\n', '\n\t')) for child in self._children])
        
         element_str = "<{name}{attrs}>{children}\n</{name}>".format(
             name=self.name,
