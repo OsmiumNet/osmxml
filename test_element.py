@@ -36,4 +36,31 @@ class TestElement(unittest.TestCase):
         self.assertIsNot(element.attributes, element_attrs)
         self.assertIsNot(element.children, element_children)
 
+    def test_encapsulation(self):
+        attr1 = XMLAttribute(name="x1", value="value1")
+        attr2 = XMLAttribute(name="x2", value="value2")
 
+        child1_attrs = [attr1]
+        child1 = XMLElement(name="child1", attributes=child1_attrs) 
+
+        element_attrs = [attr1, attr2]
+        element_children = [child1]
+        element = XMLElement(
+            name="element",
+            attributes=element_attrs,
+            children=element_children
+        )
+
+        attrs = element.attributes
+        attrs.pop()
+        children = element.children
+        children.pop()
+
+        self.assertEqual(element.name, "element")
+        self.assertEqual(element.attributes, element_attrs)
+        self.assertEqual(element.children, element_children)
+
+        element_attrs.pop()
+        self.assertNotEqual(element.attributes, element_attrs)
+        element_children.pop()
+        self.assertNotEqual(element.children, element_children)
