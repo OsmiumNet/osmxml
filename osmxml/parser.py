@@ -67,6 +67,8 @@ class XMLParser:
                         else:
                             element_tree.append(xml_element)
                             if (tag_is_close):
+                                # Close tag of last element
+                                element_tree[-1].is_closed = True
                                 # Get and remove last element and put to previous as a child
                                 element_tree[-2].add_child(element_tree.pop())
                     else:
