@@ -77,7 +77,8 @@ class XMLElement(XML):
         attrs_str = self._combine_attributes()
 
         if (not self.has_children()):
-            return "<{name}{attrs}/>".format(name=self.name, attrs=attrs_str)
+            close_slash = "/" if self.is_closed else ""
+            return "<{name}{attrs}{slash}>".format(name=self.name, attrs=attrs_str, slash=close_slash)
 
         tab = "    "
         list_children_str = []
