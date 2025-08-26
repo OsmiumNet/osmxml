@@ -170,3 +170,19 @@ class TestParser(unittest.TestCase):
         self.assertEqual(elements[0].children[0].is_closed, False)
         self.assertEqual(elements[0].children[0].children[0].is_closed, True)
         self.assertEqual(elements[0].children[0].children[0].children[0].is_closed, True)
+
+
+        xml_data = """
+            <?xml version='1.0'?>
+            <stream:stream id='11467641' 
+                version='1.0' 
+                xml:lang='en' 
+                xmlns:stream='http://etherx.jabber.org/streams' 
+                from='5222.de' 
+                xmlns='jabber:client'>      
+            """
+
+        elements = XMLParser.parse_elements(xml_data)
+
+        self.assertEqual(elements[0].is_closed, False)
+        self.assertEqual(elements[0].children[0].is_closed, False)
