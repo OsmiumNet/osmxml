@@ -1,3 +1,3 @@
 # OsmXML
 
- Python object-oriented xml package 
+Python object-oriented xml package  
