@@ -1,3 +1,5 @@
+from typing import Optional, List
+
 from .element import XMLElement
 from .attribute import XMLAttribute
 from .text import XMLTextElement
@@ -67,5 +69,6 @@ class XMLStreamParser:
                     return self._element_buffer.pop()
         else:
             # Continue parsing current element
+            pass
 
 
