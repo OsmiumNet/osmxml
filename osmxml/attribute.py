@@ -23,3 +23,16 @@ class XMLAttribute(XML):
 
     def to_string(self) -> str:
         return '{name}="{value}"'.format(name=self.name, value=self.value)
+
+
+    def __str__(self):
+        return self.to_string()
+
+    def __repr__(self):
+        repr = 'XMLAttribute(name="{name}",'
+        repr = "".join([repr, ' value="{value}")'])
+        repr = repr.format(
+                name=self.name,
+                value=self.value,
+        )
+        return repr

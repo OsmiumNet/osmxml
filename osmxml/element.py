@@ -92,3 +92,18 @@ class XMLElement(XML):
         if (self.has_attributes()):
             return " {attrs}".format(attrs=" ".join(attr.to_string() for attr in self.attributes))
         return ""
+
+
+    def __str__(self):
+        return self.to_string()
+
+    def __repr__(self):
+        repr = 'XMLElement(name="{name}",'
+        repr = "".join([repr, " attributes=len({attrs_len}),"])
+        repr = "".join([repr, " children=len({children_len}))"])
+        repr = repr.format(
+                name=self.name,
+                attrs_len=len(self.attributes),
+                children_len=len(self.children),
+        )
+        return repr

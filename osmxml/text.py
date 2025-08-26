@@ -18,4 +18,12 @@ class XMLTextElement(XMLElement):
     def to_string(self):
         return self.text
 
+
+    def __str__(self):
+        return self.to_string()
+
+    def __repr__(self):
+        repr = 'XMLTextElement(text="{text}")'
+        repr = repr.format(text=self.text)
+        return repr
     
