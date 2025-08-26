@@ -21,7 +21,7 @@ class XMLAttribute(XML):
     def value(self, value: str):
         self._value = value
 
-    def to_string(self) -> str:
+    def to_string(self, raw=True) -> str:
         return '{name}="{value}"'.format(name=self.name, value=self.value)
 
 

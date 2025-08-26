@@ -88,4 +88,4 @@ class TestElement(unittest.TestCase):
         element_test_str = "".join([element_test_str, '\n</element>'])
         element_test_str = element_test_str.format(tab=tab) 
 
-        self.assertEqual(element.to_string(), element_test_str)
+        self.assertEqual(element.to_string(raw=False), element_test_str)

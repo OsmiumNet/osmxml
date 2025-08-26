@@ -73,13 +73,7 @@ class XMLElement(XML):
         return len(self.children) > 0
 
 
-    def to_string(self) -> str:
-        return self.make_string(raw=False)
-
-    def to_raw_string(self) -> str:
-        return self.make_string(raw=True)
-
-    def make_string(self, raw=False):
+    def to_string(self, raw=True) -> str:
         attrs_str = self._combine_attributes()
 
         if (not self.has_children()):
@@ -91,7 +85,7 @@ class XMLElement(XML):
         list_children_str = []
         for child in self.children:
             # Convert child to string
-            child_str = child.make_string(raw=raw)
+            child_str = child.to_string(raw=raw)
             # Add tabs before child
             child_tab_str = child_str.replace("{new_line}".format(new_line=new_line), "{new_line}{tab}".format(new_line=new_line, tab=tab))
             # Add child to list with new line with tab
@@ -120,7 +114,7 @@ class XMLElement(XML):
 
 
     def __str__(self):
-        return self.make_string(raw=True)
+        return self.to_string(raw=True)
 
     def __repr__(self):
         repr = 'XMLElement(name="{name}",'
