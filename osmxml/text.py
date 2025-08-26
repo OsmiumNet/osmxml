@@ -16,11 +16,16 @@ class XMLTextElement(XMLElement):
 
 
     def to_string(self):
+        return self.make_string(raw=False)
+
+    def to_raw_string(self):
+        return self.make_string(raw=True)
+
+    def make_string(self, raw=False):
         return self.text
 
-
     def __str__(self):
-        return self.to_string()
+        return self.make_string(raw=True)
 
     def __repr__(self):
         repr = 'XMLTextElement(text="{text}")'

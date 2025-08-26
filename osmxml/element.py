@@ -74,33 +74,41 @@ class XMLElement(XML):
 
 
     def to_string(self) -> str:
+        return self.make_string(raw=False)
+
+    def to_raw_string(self) -> str:
+        return self.make_string(raw=True)
+
+    def make_string(self, raw=False):
         attrs_str = self._combine_attributes()
 
         if (not self.has_children()):
             close_slash = "/" if self.is_closed else ""
             return "<{name}{attrs}{slash}>".format(name=self.name, attrs=attrs_str, slash=close_slash)
 
-        tab = "    "
+        tab =  "" if raw else "    "
+        new_line =  "" if raw else "\n" 
         list_children_str = []
         for child in self.children:
             # Convert child to string
-            child_str = child.to_string()
+            child_str = child.make_string(raw=raw)
             # Add tabs before child
-            child_tab_str = child_str.replace("\n", f"\n{tab}".format(tab=tab))
+            child_tab_str = child_str.replace("{new_line}".format(new_line=new_line), "{new_line}{tab}".format(new_line=new_line, tab=tab))
             # Add child to list with new line with tab
-            list_children_str.append("\n{tab}{child}".format(child=child_tab_str, tab=tab))
+            list_children_str.append("{new_line}{tab}{child}".format(new_line=new_line, tab=tab, child=child_tab_str))
 
         children_str = "".join(list_children_str) 
        
-        closed_template = "<{name}{attrs}>{children}\n</{name}>"
-        non_closed_template = "<{name}{attrs}>{children}\n"
+        closed_template = "<{name}{attrs}>{children}{new_line}</{name}>"
+        non_closed_template = "<{name}{attrs}>{children}{new_line}"
 
         template = closed_template if self.is_closed else non_closed_template
 
         element_str = template.format(
             name=self.name,
             attrs=attrs_str,
-            children=children_str
+            children=children_str,
+            new_line=new_line,
         )
 
         return element_str.strip()
@@ -112,7 +120,7 @@ class XMLElement(XML):
 
 
     def __str__(self):
-        return self.to_string()
+        return self.make_string(raw=True)
 
     def __repr__(self):
         repr = 'XMLElement(name="{name}",'
