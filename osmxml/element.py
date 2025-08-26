@@ -13,6 +13,7 @@ class XMLElement(XML):
         self._name = name 
         self._attributes = attributes.copy() if attributes is not None else []
         self._children = children.copy() if children is not None else []
+        self._is_closed = True
 
     @property
     def name(self) -> str:
@@ -39,6 +40,15 @@ class XMLElement(XML):
     @children.setter
     def children(self, children: List[XML]):
         self._children = children
+
+
+    @property
+    def is_closed(self) -> bool:
+        return self.is_closed
+
+    @is_closed.setter
+    def is_closed(self, value: bool):
+        self._is_closed = value
 
 
     def add_attribute(self, attribute: XMLAttribute):
