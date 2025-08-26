@@ -68,7 +68,17 @@ class XMLElement(XML):
         if (not self.has_children()):
             return "<{name}{attrs}/>".format(name=self.name, attrs=attrs_str)
 
-        children_str = "".join(["\n\t{child}".format(child=child.to_string()) for child in self._children])
+        tab = "    "
+        list_children_str = []
+        for child in self.children:
+            # Convert child to string
+            child_str = child.to_string()
+            # Add tabs before child
+            child_tab_str = child_str.replace("\n", f"\n{tab}".format(tab=tab))
+            # Add child to list with new line with tab
+            list_children_str.append("\n{tab}{child}".format(child=child_tab_str, tab=tab))
+
+        children_str = "".join(list_children_str) 
        
         element_str = "<{name}{attrs}>{children}\n</{name}>".format(
             name=self.name,
@@ -80,5 +90,20 @@ class XMLElement(XML):
 
     def _combine_attributes(self) -> str:
         if (self.has_attributes()):
-            return " {attrs}".format(attrs=" ".join(attr.to_string() for attr in self._attributes))
+            return " {attrs}".format(attrs=" ".join(attr.to_string() for attr in self.attributes))
         return ""
+
+
+    def __str__(self):
+        return self.to_string()
+
+    def __repr__(self):
+        repr = 'XMLElement(name="{name}",'
+        repr = "".join([repr, " attributes=len({attrs_len}),"])
+        repr = "".join([repr, " children=len({children_len}))"])
+        repr = repr.format(
+                name=self.name,
+                attrs_len=len(self.attributes),
+                children_len=len(self.children),
+        )
+        return repr
