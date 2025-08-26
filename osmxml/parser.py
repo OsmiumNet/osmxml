@@ -55,14 +55,15 @@ class XMLParser:
 
                         if (last_xml_element.name == tag_name):
                             if (tag_is_close):
+                                # Close tag of last element
+                                last_xml_element.is_closed = True
+
                                 if (len(element_tree) > 1):
                                     # Get and remove last element and put to previous as a child
                                     element_tree[-2].add_child(element_tree.pop())
                                 else:
-                                    # Pop last full element to stack and close it
-                                    poped_xml_element = element_tree.pop() 
-                                    poped_xml_element.is_close = True 
-                                    elements.append(poped_xml_element)
+                                    # Add last full closed element to stack
+                                    elements.append(element_tree.pop())
                         else:
                             element_tree.append(xml_element)
                             if (tag_is_close):
