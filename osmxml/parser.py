@@ -45,7 +45,8 @@ class XMLParser:
                     # Create xml element
                     xml_element = XMLElement(
                         name=tag_name, 
-                        attributes=attributes
+                        attributes=attributes,
+                        is_closed=False,
                     )
 
 
@@ -58,8 +59,10 @@ class XMLParser:
                                     # Get and remove last element and put to previous as a child
                                     element_tree[-2].add_child(element_tree.pop())
                                 else:
-                                    # Add last full closed element to stack
-                                    elements.append(element_tree.pop())
+                                    # Pop last full element to stack and close it
+                                    poped_xml_element = element_tree.pop() 
+                                    poped_xml_element.is_close = True 
+                                    elements.append(poped_xml_element)
                         else:
                             element_tree.append(xml_element)
                             if (tag_is_close):
