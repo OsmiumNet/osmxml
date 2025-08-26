@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="osmxml",
-    version="0.3.1",
+    version="0.3.2",
 
     author="osmiumnet",
     description="Python object-oriented xml package",
