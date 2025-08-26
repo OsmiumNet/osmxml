@@ -9,11 +9,12 @@ class XMLElement(XML):
             name: str, 
             attributes: Optional[List[XMLAttribute]] = None,
             children: Optional[List[XML]] = None,
+            is_closed: Optional[bool] = True,
         ):
         self._name = name 
         self._attributes = attributes.copy() if attributes is not None else []
         self._children = children.copy() if children is not None else []
-        self._is_closed = True
+        self._is_closed = is_closed 
 
     @property
     def name(self) -> str:
