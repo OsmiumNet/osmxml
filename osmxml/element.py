@@ -44,7 +44,7 @@ class XMLElement(XML):
 
     @property
     def is_closed(self) -> bool:
-        return self.is_closed
+        return self._is_closed
 
     @is_closed.setter
     def is_closed(self, value: bool):
