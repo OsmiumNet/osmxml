@@ -6,6 +6,7 @@ from .element import XMLElement
 from .attribute import XMLAttribute
 from .text import XMLTextElement
 from .parser import XMLParser
+from .stream_parser import XMLStreamParser
 
 __all__ = [
     "XML",
@@ -13,4 +14,5 @@ __all__ = [
     "XMLAttribute",
     "XMLTextElement",
     "XMLParser",
+    "XMLStreamParser",
 ]

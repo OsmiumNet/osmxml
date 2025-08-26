@@ -13,6 +13,7 @@ class XMLElement(XML):
         self._name = name 
         self._attributes = attributes.copy() if attributes is not None else []
         self._children = children.copy() if children is not None else []
+        self._is_closed = True
 
     @property
     def name(self) -> str:
@@ -39,6 +40,15 @@ class XMLElement(XML):
     @children.setter
     def children(self, children: List[XML]):
         self._children = children
+
+
+    @property
+    def is_closed(self) -> bool:
+        return self._is_closed
+
+    @is_closed.setter
+    def is_closed(self, value: bool):
+        self._is_closed = value
 
 
     def add_attribute(self, attribute: XMLAttribute):
@@ -80,7 +90,12 @@ class XMLElement(XML):
 
         children_str = "".join(list_children_str) 
        
-        element_str = "<{name}{attrs}>{children}\n</{name}>".format(
+        closed_template = "<{name}{attrs}>{children}\n</{name}>"
+        non_closed_template = "<{name}{attrs}>{children}\n"
+
+        template = closed_template if self.is_closed else non_closed_template
+
+        element_str = template.format(
             name=self.name,
             attrs=attrs_str,
             children=children_str
@@ -101,9 +116,11 @@ class XMLElement(XML):
         repr = 'XMLElement(name="{name}",'
         repr = "".join([repr, " attributes=len({attrs_len}),"])
         repr = "".join([repr, " children=len({children_len}))"])
+        repr = "".join([repr, " is_closed={is_closed})"])
         repr = repr.format(
                 name=self.name,
                 attrs_len=len(self.attributes),
                 children_len=len(self.children),
+                is_closed=self.is_closed,
         )
         return repr
