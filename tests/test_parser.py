@@ -67,3 +67,26 @@ class TestParser(unittest.TestCase):
         elements = XMLParser.parse_elements(xml_data)
 
         self.assertEqual(len(elements), 3)
+
+
+        xml_data = """
+            <xml version='1.0'><stream:stream></stream:stream> 
+            """
+
+        elements = XMLParser.parse_elements(xml_data)
+
+        self.assertEqual(len(elements), 1)
+
+
+        xml_data = """
+            <xml version='1.0'>
+                <stream:stream>
+                    <to host='host'>
+                        <message/>
+                    </to>
+                        
+            """
+
+        elements = XMLParser.parse_elements(xml_data)
+
+        self.assertEqual(len(elements), 1)

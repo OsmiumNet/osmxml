@@ -73,5 +73,13 @@ class XMLParser:
                 if (strip_text):
                     element_tree[-1].add_child(XMLTextElement(text=strip_text))
 
+        # Add not closed elements
+        if (len(element_tree) > 0):
+            # Add not closed element as new element
+            elements.append(element_tree.pop(0))
+            # and add every other elements to that open element as a child
+            for i in range(len(element_tree)):
+                elements[-1].add_child(element_tree.pop(0))
+
         return elements 
 
