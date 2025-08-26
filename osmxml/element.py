@@ -90,7 +90,12 @@ class XMLElement(XML):
 
         children_str = "".join(list_children_str) 
        
-        element_str = "<{name}{attrs}>{children}\n</{name}>".format(
+        closed_template = "<{name}{attrs}>{children}\n</{name}>"
+        non_closed_template = "<{name}{attrs}>{children}\n"
+
+        template = closed_template if self.is_closed else non_closed_template
+
+        element_str = template.format(
             name=self.name,
             attrs=attrs_str,
             children=children_str
