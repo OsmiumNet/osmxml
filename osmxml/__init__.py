@@ -1,4 +1,4 @@
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __author__ = "osmiumnet"
 
 from .xml import XML
@@ -6,7 +6,7 @@ from .element import XMLElement
 from .attribute import XMLAttribute
 from .text import XMLTextElement
 from .parser import XMLParser
-from .stream_parser import XMLStreamParser
+#from .stream_parser import XMLStreamParser
 
 __all__ = [
     "XML",
@@ -14,5 +14,5 @@ __all__ = [
     "XMLAttribute",
     "XMLTextElement",
     "XMLParser",
-    "XMLStreamParser",
+    #"XMLStreamParser",
 ]
