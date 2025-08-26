@@ -102,7 +102,7 @@ class XMLElement(XML):
             children=children_str
         )
 
-        return element_str
+        return element_str.strip()
 
     def _combine_attributes(self) -> str:
         if (self.has_attributes()):
