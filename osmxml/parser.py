@@ -29,7 +29,7 @@ class XMLParser:
             text_content = match.group(2)
 
             if (tag_content and tag_content.strip()):
-                tag_is_close = tag_content.startswith("/")
+                tag_is_close = (tag_content.startswith("/") or tag_content.endswith("/"))
 
                 name_match = re.search(r'^/?([^\s/]+)', tag_content) 
                 # <name ... | </name>
