@@ -116,9 +116,11 @@ class XMLElement(XML):
         repr = 'XMLElement(name="{name}",'
         repr = "".join([repr, " attributes=len({attrs_len}),"])
         repr = "".join([repr, " children=len({children_len}))"])
+        repr = "".join([repr, " is_closed={is_closed})"])
         repr = repr.format(
                 name=self.name,
                 attrs_len=len(self.attributes),
                 children_len=len(self.children),
+                is_closed=self.is_closed,
         )
         return repr
