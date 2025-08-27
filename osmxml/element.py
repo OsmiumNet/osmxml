@@ -77,6 +77,15 @@ class XMLElement(XML):
     def add_child(self, child: XML):
         self._children.append(child)
 
+    def get_child_by_index(self, index: int) -> Optional[XML]:
+        return self._children[index] if index < len(self.children) else None
+
+    def get_child_by_name(self, name: str) -> Optional[XML]:
+        for child in self.children:
+            if child.name == name:
+                return child
+        return None
+
     def remove_child_by_index(self, index: int):
         del self._children[index]
     
