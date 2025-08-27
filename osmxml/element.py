@@ -55,8 +55,20 @@ class XMLElement(XML):
     def add_attribute(self, attribute: XMLAttribute):
         self._attributes.append(attribute) 
 
+    def get_attribute_by_name(self, name: str) -> Optional[XMLAttribute]:
+        for attr in self.attributes:
+            if attr.name == name:
+                return attr
+        return None
+
     def remove_attribute_by_index(self, index: int):
         del self._attributes[index]
+    
+    def remove_attribute_by_name(self, name: str):
+        for attr in self.attributes:
+            if attr.name == name:
+                self.remove_attribute_by_index(self.attributes.index(attr))
+                return
 
 
     def add_child(self, child: XML):
