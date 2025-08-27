@@ -89,3 +89,40 @@ class TestElement(unittest.TestCase):
         element_test_str = element_test_str.format(tab=tab) 
 
         self.assertEqual(element.to_string(raw=False), element_test_str)
+
+    def test_get_child(self):
+        element = XMLElement(
+            name="test_element",
+
+            children=[
+                XMLElement(name="child_8123"),
+                XMLElement(name="child_1298"),
+                XMLElement(name="child_1923"),
+            ]
+        )
+
+        assert element.get_child_by_index(0).name == "child_8123"
+        assert element.get_child_by_index(1).name == "child_1298"
+        assert element.get_child_by_index(2).name == "child_1923"
+
+        assert element.get_child_by_name("child_8123").name == "child_8123"
+        assert element.get_child_by_name("child_1298").name == "child_1298"
+        assert element.get_child_by_name("child_1923").name == "child_1923"
+    
+    def test_get_attribute(self):
+        element = XMLElement(
+            name="test_element",
+            attributes=[
+                XMLAttribute(name="attr_8123", value="value_8123"),
+                XMLAttribute(name="attr_1298", value="value_1298"),
+                XMLAttribute(name="attr_1923", value="value_1923"),
+            ]
+        )
+
+        assert element.get_attribute_by_index(0).name == "attr_8123"
+        assert element.get_attribute_by_index(1).name == "attr_1298"
+        assert element.get_attribute_by_index(2).name == "attr_1923"
+
+        assert element.get_attribute_by_name("attr_8123").name == "attr_8123"
+        assert element.get_attribute_by_name("attr_1298").name == "attr_1298"
+        assert element.get_attribute_by_name("attr_1923").name == "attr_1923"
