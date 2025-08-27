@@ -79,6 +79,12 @@ class XMLElement(XML):
 
     def remove_child_by_index(self, index: int):
         del self._children[index]
+    
+    def remove_child_by_name(self, name: str):
+        for child in self.children:
+            if child.name == name:
+                self.remove_child_by_index(self.children.index(child))
+                return
 
 
     def has_attributes(self):
