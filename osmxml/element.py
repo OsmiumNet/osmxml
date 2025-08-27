@@ -55,6 +55,9 @@ class XMLElement(XML):
     def add_attribute(self, attribute: XMLAttribute):
         self._attributes.append(attribute) 
 
+    def get_attribute_by_index(self, index: int) -> Optional[XMLAttribute]:
+        return self._attributes[index] if index < len(self.attributes) else None
+
     def get_attribute_by_name(self, name: str) -> Optional[XMLAttribute]:
         for attr in self.attributes:
             if attr.name == name:
