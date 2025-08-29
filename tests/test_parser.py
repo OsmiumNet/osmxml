@@ -27,7 +27,7 @@ class TestParser(unittest.TestCase):
         contents = ["Tove", "Jani", "Reminder", "Don't forget me this weekend!"]
         for index, child in enumerate(elements[0].children):
             self.assertEqual(child.name, names[index])
-            self.assertEqual(str(child.children[0]), contents[index])
+            self.assertEqual(child.children[0].to_string(raw=False), contents[index])
             self.assertEqual(child.is_closed, True)
 
 
@@ -50,7 +50,7 @@ class TestParser(unittest.TestCase):
         contents = ["The Great Gatsby", "F. Scott Fitzgerald"]
         for index, child in enumerate(elements[0].children):
             self.assertEqual(child.name, names[index])
-            self.assertEqual(str(child.children[0]), contents[index])
+            self.assertEqual(child.children[0].to_string(raw=False), contents[index])
             self.assertEqual(child.is_closed, True)
 
 
@@ -76,9 +76,9 @@ class TestParser(unittest.TestCase):
         for index, child in enumerate(elements[0].children):
             self.assertEqual(child.name, names[index])
             if (len(child.children) != 0):
-                self.assertEqual(str(child.children[0]), contents[index])
+                self.assertEqual(child.children[0].to_string(raw=False), contents[index])
             else:
-                self.assertEqual(child.text, contents[index])
+                self.assertEqual(child.to_string(raw=False), contents[index])
                 
             self.assertEqual(child.is_closed, True)
 
