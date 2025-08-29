@@ -77,7 +77,8 @@ class XMLParser:
             elif (text_content):
                 strip_text = text_content.strip()
                 if (strip_text):
-                    element_tree[-1].add_child(XMLTextElement(text=strip_text))
+                    unescaped_text = XMLParser.unescape_characters(strip_text)
+                    element_tree[-1].add_child(XMLTextElement(text=unescaped_text))
 
         # Add not closed elements
         if (len(element_tree) > 0):
@@ -89,3 +90,13 @@ class XMLParser:
 
         return elements 
 
+    # Converting equivalent XML entities into special characters
+    @staticmethod
+    def unescape_characters(text: str) -> str:
+        escaped_text = text.replace("&amp;", "&")
+        escaped_text = escaped_text.replace("&lt;", "<")
+        escaped_text = escaped_text.replace("&gt;", ">")
+        escaped_text = escaped_text.replace("&quot;", '"')
+        escaped_text = escaped_text.replace("&apos;", "'")
+
+        return escaped_text
