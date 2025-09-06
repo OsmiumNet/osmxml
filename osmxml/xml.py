@@ -1,4 +1,4 @@
-class XML:
+class Xml:
     def __init__(self):
         pass
 

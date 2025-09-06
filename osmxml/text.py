@@ -1,6 +1,6 @@
-from .element import XMLElement
+from .element import XmlElement
 
-class XMLTextElement(XMLElement):
+class XmlTextElement(XmlElement):
     def __init__(self, text: str):
         super().__init__(name="")
 
@@ -34,7 +34,7 @@ class XMLTextElement(XMLElement):
         return self.to_string(raw=True)
 
     def __repr__(self):
-        repr = 'XMLTextElement(text="{text}")'
+        repr = 'XmlTextElement(text="{text}")'
         repr = repr.format(text=self.text)
         return repr
     

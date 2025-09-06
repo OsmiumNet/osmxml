@@ -1,8 +1,8 @@
 import unittest
 
-from osmxml import XMLParser
-from osmxml import XMLElement
-from osmxml import XMLTextElement
+from osmxml import XmlParser
+from osmxml import XmlElement
+from osmxml import XmlTextElement
 
 class TestParser(unittest.TestCase):
     def test_parse_structure(self):
@@ -15,7 +15,7 @@ class TestParser(unittest.TestCase):
             </note>
             """
 
-        elements = XMLParser.parse_elements(xml_data)
+        elements = XmlParser.parse_elements(xml_data)
        
         self.assertEqual(len(elements), 1)
         self.assertEqual(elements[0].name, "note")
@@ -38,7 +38,7 @@ class TestParser(unittest.TestCase):
             </book>
             """
 
-        elements = XMLParser.parse_elements(xml_data)
+        elements = XmlParser.parse_elements(xml_data)
        
         self.assertEqual(len(elements), 1)
         self.assertEqual(elements[0].name, "book")
@@ -63,7 +63,7 @@ class TestParser(unittest.TestCase):
             </message>
             """
 
-        elements = XMLParser.parse_elements(xml_data)
+        elements = XmlParser.parse_elements(xml_data)
        
         self.assertEqual(len(elements), 1)
         self.assertEqual(elements[0].name, "message")
@@ -101,7 +101,7 @@ class TestParser(unittest.TestCase):
             </product>
             """
 
-        elements = XMLParser.parse_elements(xml_data)
+        elements = XmlParser.parse_elements(xml_data)
 
         products = [
             { 
@@ -147,7 +147,7 @@ class TestParser(unittest.TestCase):
             <xml version='1.0'><stream:stream></stream:stream> 
             """
 
-        elements = XMLParser.parse_elements(xml_data)
+        elements = XmlParser.parse_elements(xml_data)
 
         self.assertEqual(len(elements), 1)
         self.assertEqual(elements[0].is_closed, False)
@@ -163,7 +163,7 @@ class TestParser(unittest.TestCase):
                         
             """
 
-        elements = XMLParser.parse_elements(xml_data)
+        elements = XmlParser.parse_elements(xml_data)
 
         self.assertEqual(len(elements), 1)
         self.assertEqual(elements[0].is_closed, False)
@@ -182,7 +182,7 @@ class TestParser(unittest.TestCase):
                 xmlns='jabber:client'>      
             """
 
-        elements = XMLParser.parse_elements(xml_data)
+        elements = XmlParser.parse_elements(xml_data)
 
         self.assertEqual(elements[0].is_closed, False)
         self.assertEqual(elements[0].children[0].is_closed, False)

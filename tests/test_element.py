@@ -1,26 +1,26 @@
 import unittest
 
-from osmxml import XMLElement, XMLAttribute
+from osmxml import XmlElement, XmlAttribute
 
 class TestElement(unittest.TestCase):
     def test_init(self):
-        element = XMLElement(name="element")
+        element = XmlElement(name="element")
 
         self.assertEqual(element.name, "element")
         self.assertEqual(element.attributes, [])
         self.assertEqual(element.children, [])
 
     def test_full_init(self):
-        attr1 = XMLAttribute(name="x1", value="value1")
-        attr2 = XMLAttribute(name="x2", value="value2")
-        attr3 = XMLAttribute(name="x3", value="value3")
+        attr1 = XmlAttribute(name="x1", value="value1")
+        attr2 = XmlAttribute(name="x2", value="value2")
+        attr3 = XmlAttribute(name="x3", value="value3")
 
         child1_attrs = [attr1]
-        child1 = XMLElement(name="child1", attributes=child1_attrs) 
+        child1 = XmlElement(name="child1", attributes=child1_attrs) 
 
         element_attrs = [attr2, attr3]
         element_children = [child1]
-        element = XMLElement(
+        element = XmlElement(
             name="element",
             attributes=element_attrs,
             children=element_children
@@ -37,15 +37,15 @@ class TestElement(unittest.TestCase):
         self.assertIsNot(element.children, element_children)
 
     def test_encapsulation(self):
-        attr1 = XMLAttribute(name="x1", value="value1")
-        attr2 = XMLAttribute(name="x2", value="value2")
+        attr1 = XmlAttribute(name="x1", value="value1")
+        attr2 = XmlAttribute(name="x2", value="value2")
 
         child1_attrs = [attr1]
-        child1 = XMLElement(name="child1", attributes=child1_attrs) 
+        child1 = XmlElement(name="child1", attributes=child1_attrs) 
 
         element_attrs = [attr1, attr2]
         element_children = [child1]
-        element = XMLElement(
+        element = XmlElement(
             name="element",
             attributes=element_attrs,
             children=element_children
@@ -66,16 +66,16 @@ class TestElement(unittest.TestCase):
         self.assertNotEqual(element.children, element_children)
 
     def test_to_string(self):
-        attr1 = XMLAttribute(name="x1", value="value1")
-        attr2 = XMLAttribute(name="x2", value="value2")
+        attr1 = XmlAttribute(name="x1", value="value1")
+        attr2 = XmlAttribute(name="x2", value="value2")
 
         child1_attrs = [attr1]
-        child1 = XMLElement(name="child1", attributes=child1_attrs) 
-        child2 = XMLElement(name="child2") 
+        child1 = XmlElement(name="child1", attributes=child1_attrs) 
+        child2 = XmlElement(name="child2") 
 
         element_attrs = [attr1, attr2]
         element_children = [child1, child2]
-        element = XMLElement(
+        element = XmlElement(
             name="element",
             attributes=element_attrs,
             children=element_children
@@ -91,13 +91,13 @@ class TestElement(unittest.TestCase):
         self.assertEqual(element.to_string(raw=False), element_test_str)
 
     def test_get_child(self):
-        element = XMLElement(
+        element = XmlElement(
             name="test_element",
 
             children=[
-                XMLElement(name="child_8123"),
-                XMLElement(name="child_1298"),
-                XMLElement(name="child_1923"),
+                XmlElement(name="child_8123"),
+                XmlElement(name="child_1298"),
+                XmlElement(name="child_1923"),
             ]
         )
 
@@ -110,12 +110,12 @@ class TestElement(unittest.TestCase):
         assert element.get_child_by_name("child_1923").name == "child_1923"
     
     def test_get_attribute(self):
-        element = XMLElement(
+        element = XmlElement(
             name="test_element",
             attributes=[
-                XMLAttribute(name="attr_8123", value="value_8123"),
-                XMLAttribute(name="attr_1298", value="value_1298"),
-                XMLAttribute(name="attr_1923", value="value_1923"),
+                XmlAttribute(name="attr_8123", value="value_8123"),
+                XmlAttribute(name="attr_1298", value="value_1298"),
+                XmlAttribute(name="attr_1923", value="value_1923"),
             ]
         )
 

@@ -1,14 +1,14 @@
 from typing import Optional, List
 
-from .xml import XML   
-from .attribute import XMLAttribute
+from .xml import Xml   
+from .attribute import XmlAttribute
 
-class XMLElement(XML):
+class XmlElement(Xml):
     def __init__(
             self, 
             name: str, 
-            attributes: Optional[List[XMLAttribute]] = None,
-            children: Optional[List[XML]] = None,
+            attributes: Optional[List[XmlAttribute]] = None,
+            children: Optional[List[Xml]] = None,
             is_closed: Optional[bool] = True,
         ):
         self._name = name 
@@ -26,20 +26,20 @@ class XMLElement(XML):
 
 
     @property
-    def attributes(self) -> List[XMLAttribute]:
+    def attributes(self) -> List[XmlAttribute]:
         return self._attributes.copy()
 
     @attributes.setter
-    def attributes(self, attributes: List[XMLAttribute]):
+    def attributes(self, attributes: List[XmlAttribute]):
         self._attributes = attributes
 
 
     @property
-    def children(self) -> List[XML]:
+    def children(self) -> List[Xml]:
         return self._children.copy()
 
     @children.setter
-    def children(self, children: List[XML]):
+    def children(self, children: List[Xml]):
         self._children = children
 
 
@@ -52,13 +52,13 @@ class XMLElement(XML):
         self._is_closed = value
 
 
-    def add_attribute(self, attribute: XMLAttribute):
+    def add_attribute(self, attribute: XmlAttribute):
         self._attributes.append(attribute) 
 
-    def get_attribute_by_index(self, index: int) -> Optional[XMLAttribute]:
+    def get_attribute_by_index(self, index: int) -> Optional[XmlAttribute]:
         return self._attributes[index] if index < len(self.attributes) else None
 
-    def get_attribute_by_name(self, name: str) -> Optional[XMLAttribute]:
+    def get_attribute_by_name(self, name: str) -> Optional[XmlAttribute]:
         for attr in self.attributes:
             if attr.name == name:
                 return attr
@@ -74,13 +74,13 @@ class XMLElement(XML):
                 return
 
 
-    def add_child(self, child: XML):
+    def add_child(self, child: Xml):
         self._children.append(child)
 
-    def get_child_by_index(self, index: int) -> Optional[XML]:
+    def get_child_by_index(self, index: int) -> Optional[Xml]:
         return self._children[index] if index < len(self.children) else None
 
-    def get_child_by_name(self, name: str) -> Optional[XML]:
+    def get_child_by_name(self, name: str) -> Optional[Xml]:
         for child in self.children:
             if child.name == name:
                 return child
@@ -147,7 +147,7 @@ class XMLElement(XML):
         return self.to_string(raw=True)
 
     def __repr__(self):
-        repr = 'XMLElement(name="{name}",'
+        repr = 'XmlElement(name="{name}",'
         repr = "".join([repr, " attributes=len({attrs_len}),"])
         repr = "".join([repr, " children=len({children_len}))"])
         repr = "".join([repr, " is_closed={is_closed})"])

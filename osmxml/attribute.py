@@ -1,6 +1,6 @@
-from .xml import XML   
+from .xml import Xml   
 
-class XMLAttribute(XML):
+class XmlAttribute(Xml):
     def __init__(self, name: str, value: str):
         self._name = name
         self._value = value
@@ -29,7 +29,7 @@ class XMLAttribute(XML):
         return self.to_string()
 
     def __repr__(self):
-        repr = 'XMLAttribute(name="{name}",'
+        repr = 'XmlAttribute(name="{name}",'
         repr = "".join([repr, ' value="{value}")'])
         repr = repr.format(
                 name=self.name,
